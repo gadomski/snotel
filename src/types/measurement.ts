@@ -1,34 +1,30 @@
 export interface Measurement {
-  stationId: string;
   stationTriplet: string;
-  elementCode: string; // SNWD, WTEQ, TOBS, PREC, etc.
-  datetime: string;
+  data: Data[];
+}
+
+export interface Data {
+  stationElement: StationElement;
+  values: Value[];
+}
+
+export interface StationElement {
+  elementCode: ElementCodeKey;
+  ordinal: number;
+  durationName: string;
+  dataPrecision: number;
+  storedUnitCode: string;
+  originalUnitCode: string;
+  beginDate: string;
+  endDate: string;
+  derivedData: boolean;
+}
+
+export interface Value {
+  date: string;
   value: number;
-  flags?: string;
 }
 
-export interface TimeSeriesData {
-  stationId: string;
-  elementCode: string;
-  elementName: string;
-  unit: string;
-  data: DataPoint[];
-}
-
-export interface DataPoint {
-  datetime: string;
-  value: number;
-  flags?: string;
-}
-
-export interface ElementCode {
-  code: string;
-  name: string;
-  unit: string;
-  description: string;
-}
-
-// Common SNOTEL element codes
 export const ELEMENT_CODES = {
   SNWD: 'Snow Depth',
   WTEQ: 'Snow Water Equivalent',

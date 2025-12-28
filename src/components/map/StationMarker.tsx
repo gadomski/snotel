@@ -20,9 +20,9 @@ export default function StationMarker({
     setPopupInfo({
       longitude: station.longitude,
       latitude: station.latitude,
-      stationId: station.id,
+      stationId: station.stationId,
     });
-    setSelectedStation(station.id);
+    setSelectedStation(station.stationId);
   };
 
   const style = isSelected ? MARKER_STYLES.selected : MARKER_STYLES.default;

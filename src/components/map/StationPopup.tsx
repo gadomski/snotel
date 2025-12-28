@@ -11,7 +11,7 @@ interface StationPopupProps {
 export default function StationPopup({ stationId }: StationPopupProps) {
   const navigate = useNavigate();
   const { data: stations } = useStations();
-  const station = stations?.find((s) => s.id === stationId);
+  const station = stations?.find((s) => s.stationId === stationId);
 
   const { data: currentData, isLoading } = useCurrentStationData(
     station?.stationTriplet || '',
@@ -29,22 +29,28 @@ export default function StationPopup({ stationId }: StationPopupProps) {
       <VStack align="stretch" spacing={2}>
         <Heading size="sm">{station.name}</Heading>
         <Text fontSize="xs" color="gray.600">
-          {station.state} | Elevation: {station.elevation}{' '}
-          {station.elevationUnits}
+          Elevation: {station.elevation}'
         </Text>
 
         {isLoading ? (
           <Text fontSize="xs">Loading current data...</Text>
         ) : currentData && currentData.length > 0 ? (
           <VStack align="stretch" spacing={1} fontSize="xs">
-            {currentData.map((measurement) => (
-              <Text key={measurement.elementCode}>
-                <strong>
-                  {ELEMENT_DESCRIPTIONS[measurement.elementCode]}:
-                </strong>{' '}
-                {measurement.value} {ELEMENT_UNITS[measurement.elementCode]}
-              </Text>
-            ))}
+            {currentData.map((measurement) =>
+              measurement.data.map((data) => (
+                <Text
+                  key={
+                    measurement.stationTriplet + data.stationElement.elementCode
+                  }
+                >
+                  <strong>
+                    {ELEMENT_DESCRIPTIONS[data.stationElement.elementCode]}:
+                  </strong>{' '}
+                  {data.values.map((value) => value.value)}{' '}
+                  {ELEMENT_UNITS[data.stationElement.elementCode]}
+                </Text>
+              ))
+            )}
           </VStack>
         ) : (
           <Text fontSize="xs" color="gray.500">

@@ -40,7 +40,7 @@ export const snotelAPI = {
   ): Promise<Measurement[]> => {
     const params: StationDataRequest = {
       stationTriplets: stationTriplets.join(','),
-      elementCodes: elementCodes.join(','),
+      elements: elementCodes.join(','),
       beginDate,
       endDate,
     };

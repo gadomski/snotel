@@ -37,8 +37,6 @@ export default function SnotelMap() {
         ref={mapRef}
         {...viewState}
         onMove={onMove}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        mapLib={import('maplibre-gl') as any}
         mapStyle={MAP_STYLE}
         style={{ width: '100%', height: '100%' }}
         {...MAP_OPTIONS}
