@@ -1,5 +1,5 @@
-import { Box, Grid, GridItem } from '@chakra-ui/react'
-import SnotelMap from '@/components/map/SnotelMap'
+import { Box, Grid, GridItem } from '@chakra-ui/react';
+import SnotelMap from '@/components/map/SnotelMap';
 
 export default function HomePage() {
   return (
@@ -10,5 +10,5 @@ export default function HomePage() {
         </GridItem>
       </Grid>
     </Box>
-  )
+  );
 }

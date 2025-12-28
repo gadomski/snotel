@@ -1,39 +1,39 @@
-import { create } from 'zustand'
-import { StationFilters } from '@/types/station'
-import { getCurrentWaterYearRange } from '@/utils/waterYear'
+import { create } from 'zustand';
+import { StationFilters } from '@/types/station';
+import { getCurrentWaterYearRange } from '@/utils/waterYear';
 
 interface DateRange {
-  start: string
-  end: string
+  start: string;
+  end: string;
 }
 
 interface UIState {
   // Selected station
-  selectedStationId: string | null
-  setSelectedStation: (id: string | null) => void
+  selectedStationId: string | null;
+  setSelectedStation: (id: string | null) => void;
 
   // Station filters
-  filters: StationFilters
-  setFilters: (filters: Partial<StationFilters>) => void
-  resetFilters: () => void
+  filters: StationFilters;
+  setFilters: (filters: Partial<StationFilters>) => void;
+  resetFilters: () => void;
 
   // Date range for historical data
-  dateRange: DateRange
-  setDateRange: (range: DateRange) => void
-  resetDateRange: () => void
+  dateRange: DateRange;
+  setDateRange: (range: DateRange) => void;
+  resetDateRange: () => void;
 
   // Sidebar visibility (for mobile)
-  isSidebarOpen: boolean
-  toggleSidebar: () => void
-  setSidebarOpen: (open: boolean) => void
+  isSidebarOpen: boolean;
+  toggleSidebar: () => void;
+  setSidebarOpen: (open: boolean) => void;
 
   // Selected element codes for display
-  selectedElements: string[]
-  setSelectedElements: (elements: string[]) => void
-  toggleElement: (element: string) => void
+  selectedElements: string[];
+  setSelectedElements: (elements: string[]) => void;
+  toggleElement: (element: string) => void;
 }
 
-const initialWaterYearRange = getCurrentWaterYearRange()
+const initialWaterYearRange = getCurrentWaterYearRange();
 
 export const useUIStore = create<UIState>((set) => ({
   // Selected station
@@ -64,7 +64,8 @@ export const useUIStore = create<UIState>((set) => ({
 
   // Sidebar
   isSidebarOpen: false,
-  toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
+  toggleSidebar: () =>
+    set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
   setSidebarOpen: (open) => set({ isSidebarOpen: open }),
 
   // Selected elements
@@ -76,4 +77,4 @@ export const useUIStore = create<UIState>((set) => ({
         ? state.selectedElements.filter((e) => e !== element)
         : [...state.selectedElements, element],
     })),
-}))
+}));

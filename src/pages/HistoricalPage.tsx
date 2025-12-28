@@ -1,4 +1,4 @@
-import { Container, Heading, Text } from '@chakra-ui/react'
+import { Container, Heading, Text } from '@chakra-ui/react';
 
 export default function HistoricalPage() {
   return (
@@ -10,5 +10,5 @@ export default function HistoricalPage() {
         Historical analysis and station comparison tools will be displayed here.
       </Text>
     </Container>
-  )
+  );
 }

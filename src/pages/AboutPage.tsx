@@ -8,8 +8,8 @@ import {
   List,
   ListItem,
   ListIcon,
-} from '@chakra-ui/react'
-import { FiExternalLink } from 'react-icons/fi'
+} from '@chakra-ui/react';
+import { FiExternalLink } from 'react-icons/fi';
 
 export default function AboutPage() {
   return (
@@ -62,7 +62,8 @@ export default function AboutPage() {
             isExternal
             color="blue.500"
           >
-            AWDB REST API Documentation <FiExternalLink style={{ display: 'inline' }} />
+            AWDB REST API Documentation{' '}
+            <FiExternalLink style={{ display: 'inline' }} />
           </Link>
         </Box>
 
@@ -71,10 +72,11 @@ export default function AboutPage() {
             Technology
           </Heading>
           <Text>
-            Built with React, TypeScript, Chakra UI, MapLibre GL JS, and React Query.
+            Built with React, TypeScript, Chakra UI, MapLibre GL JS, and React
+            Query.
           </Text>
         </Box>
       </VStack>
     </Container>
-  )
+  );
 }

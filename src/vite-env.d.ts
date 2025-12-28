@@ -1,10 +1,10 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_AWDB_API_URL: string
-  readonly VITE_MAP_STYLE: string
+  readonly VITE_AWDB_API_URL: string;
+  readonly VITE_MAP_STYLE: string;
 }
 
 interface ImportMeta {
-  readonly env: ImportMetaEnv
+  readonly env: ImportMetaEnv;
 }

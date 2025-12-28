@@ -1,12 +1,12 @@
-import { ChakraProvider } from '@chakra-ui/react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClient } from './lib/queryClient'
-import Layout from './components/layout/Layout'
-import HomePage from './pages/HomePage'
-import StationDetailPage from './pages/StationDetailPage'
-import HistoricalPage from './pages/HistoricalPage'
-import AboutPage from './pages/AboutPage'
+import { ChakraProvider } from '@chakra-ui/react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './lib/queryClient';
+import Layout from './components/layout/Layout';
+import HomePage from './pages/HomePage';
+import StationDetailPage from './pages/StationDetailPage';
+import HistoricalPage from './pages/HistoricalPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         </BrowserRouter>
       </ChakraProvider>
     </QueryClientProvider>
-  )
+  );
 }
 
-export default App
+export default App;

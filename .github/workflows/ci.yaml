@@ -20,6 +20,8 @@ jobs:
         run: corepack enable
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - name: Check formatting
+        run: yarn format:check
       - name: Run lints
         run: yarn lint
       - name: Build app

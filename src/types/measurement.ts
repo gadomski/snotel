@@ -1,31 +1,31 @@
 export interface Measurement {
-  stationId: string
-  stationTriplet: string
-  elementCode: string // SNWD, WTEQ, TOBS, PREC, etc.
-  datetime: string
-  value: number
-  flags?: string
+  stationId: string;
+  stationTriplet: string;
+  elementCode: string; // SNWD, WTEQ, TOBS, PREC, etc.
+  datetime: string;
+  value: number;
+  flags?: string;
 }
 
 export interface TimeSeriesData {
-  stationId: string
-  elementCode: string
-  elementName: string
-  unit: string
-  data: DataPoint[]
+  stationId: string;
+  elementCode: string;
+  elementName: string;
+  unit: string;
+  data: DataPoint[];
 }
 
 export interface DataPoint {
-  datetime: string
-  value: number
-  flags?: string
+  datetime: string;
+  value: number;
+  flags?: string;
 }
 
 export interface ElementCode {
-  code: string
-  name: string
-  unit: string
-  description: string
+  code: string;
+  name: string;
+  unit: string;
+  description: string;
 }
 
 // Common SNOTEL element codes
@@ -37,6 +37,6 @@ export const ELEMENT_CODES = {
   TMIN: 'Temperature Minimum',
   PREC: 'Precipitation Accumulation',
   PRCP: 'Precipitation Increment',
-} as const
+} as const;
 
-export type ElementCodeKey = keyof typeof ELEMENT_CODES
+export type ElementCodeKey = keyof typeof ELEMENT_CODES;

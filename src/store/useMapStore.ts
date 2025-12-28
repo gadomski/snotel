@@ -1,37 +1,39 @@
-import { create } from 'zustand'
-import { MapViewState } from '@/types/map'
-import { MAP_DEFAULTS } from '@/utils/constants'
+import { create } from 'zustand';
+import { MapViewState } from '@/types/map';
+import { MAP_DEFAULTS } from '@/utils/constants';
 
 interface MapState {
   // Viewport state
-  viewState: MapViewState
-  setViewState: (state: Partial<MapViewState>) => void
+  viewState: MapViewState;
+  setViewState: (state: Partial<MapViewState>) => void;
 
   // Selected marker
-  selectedMarkerId: string | null
-  setSelectedMarker: (id: string | null) => void
+  selectedMarkerId: string | null;
+  setSelectedMarker: (id: string | null) => void;
 
   // Popup
-  showPopup: boolean
+  showPopup: boolean;
   popupInfo: {
-    longitude: number
-    latitude: number
-    stationId: string
-  } | null
-  setPopupInfo: (info: {
-    longitude: number
-    latitude: number
-    stationId: string
-  } | null) => void
-  closePopup: () => void
+    longitude: number;
+    latitude: number;
+    stationId: string;
+  } | null;
+  setPopupInfo: (
+    info: {
+      longitude: number;
+      latitude: number;
+      stationId: string;
+    } | null
+  ) => void;
+  closePopup: () => void;
 
   // Map style
-  mapStyle: string
-  setMapStyle: (style: string) => void
+  mapStyle: string;
+  setMapStyle: (style: string) => void;
 
   // Clustering
-  enableClustering: boolean
-  toggleClustering: () => void
+  enableClustering: boolean;
+  toggleClustering: () => void;
 }
 
 export const useMapStore = create<MapState>((set) => ({
@@ -53,17 +55,17 @@ export const useMapStore = create<MapState>((set) => ({
   // Popup
   showPopup: false,
   popupInfo: null,
-  setPopupInfo: (info) =>
-    set({ popupInfo: info, showPopup: info !== null }),
-  closePopup: () =>
-    set({ showPopup: false, popupInfo: null }),
+  setPopupInfo: (info) => set({ popupInfo: info, showPopup: info !== null }),
+  closePopup: () => set({ showPopup: false, popupInfo: null }),
 
   // Map style
-  mapStyle: import.meta.env.VITE_MAP_STYLE || 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+  mapStyle:
+    import.meta.env.VITE_MAP_STYLE ||
+    'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
   setMapStyle: (style) => set({ mapStyle: style }),
 
   // Clustering
   enableClustering: true,
   toggleClustering: () =>
     set((state) => ({ enableClustering: !state.enableClustering })),
-}))
+}));

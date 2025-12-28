@@ -6,16 +6,16 @@ import {
   HStack,
   IconButton,
   useColorModeValue,
-} from '@chakra-ui/react'
-import { Link as RouterLink } from 'react-router-dom'
-import { FiMenu } from 'react-icons/fi'
-import { useUIStore } from '@/store/useUIStore'
-import { APP_NAME } from '@/utils/constants'
+} from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import { FiMenu } from 'react-icons/fi';
+import { useUIStore } from '@/store/useUIStore';
+import { APP_NAME } from '@/utils/constants';
 
 export default function Header() {
-  const { toggleSidebar } = useUIStore()
-  const bgColor = useColorModeValue('white', 'gray.800')
-  const borderColor = useColorModeValue('gray.200', 'gray.700')
+  const { toggleSidebar } = useUIStore();
+  const bgColor = useColorModeValue('white', 'gray.800');
+  const borderColor = useColorModeValue('gray.200', 'gray.700');
 
   return (
     <Box
@@ -57,5 +57,5 @@ export default function Header() {
         </HStack>
       </Flex>
     </Box>
-  )
+  );
 }

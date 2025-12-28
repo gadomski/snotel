@@ -1,28 +1,31 @@
-import { Marker } from 'react-map-gl'
-import { useMapStore } from '@/store/useMapStore'
-import { useUIStore } from '@/store/useUIStore'
-import { Station } from '@/types/station'
-import { MARKER_STYLES } from '@/lib/mapConfig'
+import { Marker } from '@vis.gl/react-maplibre';
+import { useMapStore } from '@/store/useMapStore';
+import { useUIStore } from '@/store/useUIStore';
+import { Station } from '@/types/station';
+import { MARKER_STYLES } from '@/lib/mapConfig';
 
 interface StationMarkerProps {
-  station: Station
-  isSelected?: boolean
+  station: Station;
+  isSelected?: boolean;
 }
 
-export default function StationMarker({ station, isSelected }: StationMarkerProps) {
-  const { setPopupInfo } = useMapStore()
-  const { setSelectedStation } = useUIStore()
+export default function StationMarker({
+  station,
+  isSelected,
+}: StationMarkerProps) {
+  const { setPopupInfo } = useMapStore();
+  const { setSelectedStation } = useUIStore();
 
   const handleClick = () => {
     setPopupInfo({
       longitude: station.longitude,
       latitude: station.latitude,
       stationId: station.id,
-    })
-    setSelectedStation(station.id)
-  }
+    });
+    setSelectedStation(station.id);
+  };
 
-  const style = isSelected ? MARKER_STYLES.selected : MARKER_STYLES.default
+  const style = isSelected ? MARKER_STYLES.selected : MARKER_STYLES.default;
 
   return (
     <Marker
@@ -46,5 +49,5 @@ export default function StationMarker({ station, isSelected }: StationMarkerProp
         <path d="M12 0C7.58 0 4 3.58 4 8c0 5.25 8 13 8 13s8-7.75 8-13c0-4.42-3.58-8-8-8zm0 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" />
       </svg>
     </Marker>
-  )
+  );
 }

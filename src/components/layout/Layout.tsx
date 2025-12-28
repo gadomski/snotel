@@ -1,9 +1,9 @@
-import { Box, Flex } from '@chakra-ui/react'
-import { ReactNode } from 'react'
-import Header from './Header'
+import { Box, Flex } from '@chakra-ui/react';
+import { ReactNode } from 'react';
+import Header from './Header';
 
 interface LayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
@@ -14,5 +14,5 @@ export default function Layout({ children }: LayoutProps) {
         {children}
       </Box>
     </Flex>
-  )
+  );
 }
