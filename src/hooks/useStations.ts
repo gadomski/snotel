@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { awdbApi, Station } from '@/services/api/awdb';
+
+import { Station, awdbApi } from '@/services/api/awdb';
 
 export const useStations = (params: { networkCode: string }) => {
   return useQuery<Station[], Error>({
