@@ -1,25 +1,27 @@
-import { useQueries } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { awdbApi } from '@/services/api/awdb';
 
 export const useStationData = (params: {
-  stationTriplets: string[];
+  networkCode: string;
   elements: string[];
   beginDate: string;
   endDate: string;
 }) => {
-  return useQueries({
-    queries: params.stationTriplets.map((stationTriplet) => {
-      return {
-        queryKey: ['station-data', stationTriplet, params.elements],
-        queryFn: () =>
-          awdbApi.getStationData({
-            stationTriplets: [stationTriplet],
-            elements: params.elements,
-            beginDate: params.beginDate,
-            endDate: params.endDate,
-          }),
-      };
-    }),
+  return useQuery({
+    queryKey: [
+      'station-data',
+      params.networkCode,
+      params.elements,
+      params.beginDate,
+      params.endDate,
+    ],
+    queryFn: () =>
+      awdbApi.getStationData({
+        stationTriplets: [`*:CO:${params.networkCode}`],
+        elements: params.elements,
+        beginDate: params.beginDate,
+        endDate: params.endDate,
+      }),
   });
 };

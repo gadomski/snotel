@@ -8,7 +8,7 @@ export const awdbApi = {
   getStations: async (params: { networkCode: string }): Promise<Station[]> => {
     const response = await apiClient.get('/services/v1/stations', {
       params: {
-        stationTriplets: '*:*:' + params.networkCode,
+        stationTriplets: '*:CO:*' + params.networkCode,
       },
     });
     return response.data;
