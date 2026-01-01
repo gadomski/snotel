@@ -83,61 +83,55 @@ export default function OurMap() {
     return 20000 / Math.pow(2, zoom - INITIAL_VIEW_STATE.zoom);
   }, [zoom]);
 
-  const layers = [];
+  const layers = [
+    new HexagonLayer<Feature>({
+      id: 'hexagons',
+      data: stations,
+      getPosition: (f: Feature) =>
+        (f.geometry as Point).coordinates as Position,
+      getColorWeight: (f: Feature) => f.properties?.value,
+      radius,
+      colorAggregation: 'MEAN',
+      colorDomain: [0, 2],
+      colorRange: [
+        [213, 62, 79, 200],
+        [244, 109, 67, 200],
+        [253, 174, 97, 200],
+        [254, 224, 139, 200],
+        [230, 245, 152, 200],
+        [171, 221, 164, 200],
+      ],
+    }),
 
-  if (stations) {
-    layers.push(
-      new HexagonLayer<Feature>({
-        id: 'hexagons',
-        data: stations,
-        getPosition: (f: Feature) =>
-          (f.geometry as Point).coordinates as Position,
-        getColorWeight: (f: Feature) => f.properties?.value,
-        radius,
-        colorAggregation: 'MEAN',
-        colorDomain: [0, 2],
-        colorRange: [
-          [213, 62, 79, 200],
-          [244, 109, 67, 200],
-          [253, 174, 97, 200],
-          [254, 224, 139, 200],
-          [230, 245, 152, 200],
-          [171, 221, 164, 200],
-        ],
-      })
-    );
-
-    layers.push(
-      new GeoJsonLayer({
-        id: 'points',
-        data: stations,
-        pointType: 'circle',
-        pointRadiusMinPixels: 5,
-        pointRadiusMaxPixels: 10,
-        getFillColor: (f: Feature): [number, number, number, number] => {
-          const value = f.properties?.value || 0;
-          const normalized = Math.max(0, Math.min(1, value / 2));
-          const colorRange = [
-            [213, 62, 79],
-            [244, 109, 67],
-            [253, 174, 97],
-            [254, 224, 139],
-            [230, 245, 152],
-            [171, 221, 164],
-          ];
-          const index = Math.floor(normalized * (colorRange.length - 1));
-          const nextIndex = Math.min(index + 1, colorRange.length - 1);
-          const t = normalized * (colorRange.length - 1) - index;
-          const color = colorRange[index].map((c, i) =>
-            Math.round(c * (1 - t) + colorRange[nextIndex][i] * t)
-          );
-          return [color[0], color[1], color[2], 200];
-        },
-        getLineColor: [0, 0, 0, 255],
-        lineWidthMinPixels: 1,
-      })
-    );
-  }
+    new GeoJsonLayer({
+      id: 'points',
+      data: stations,
+      pointType: 'circle',
+      pointRadiusMinPixels: 5,
+      pointRadiusMaxPixels: 10,
+      getFillColor: (f: Feature): [number, number, number, number] => {
+        const value = f.properties?.value || 0;
+        const normalized = Math.max(0, Math.min(1, value / 2));
+        const colorRange = [
+          [213, 62, 79],
+          [244, 109, 67],
+          [253, 174, 97],
+          [254, 224, 139],
+          [230, 245, 152],
+          [171, 221, 164],
+        ];
+        const index = Math.floor(normalized * (colorRange.length - 1));
+        const nextIndex = Math.min(index + 1, colorRange.length - 1);
+        const t = normalized * (colorRange.length - 1) - index;
+        const color = colorRange[index].map((c, i) =>
+          Math.round(c * (1 - t) + colorRange[nextIndex][i] * t)
+        );
+        return [color[0], color[1], color[2], 200];
+      },
+      getLineColor: [0, 0, 0, 255],
+      lineWidthMinPixels: 1,
+    }),
+  ];
 
   return (
     <Map
@@ -148,7 +142,7 @@ export default function OurMap() {
       {...MAP_OPTIONS}
     >
       <NavigationControl position="top-right" />
-      {stations && <DeckGLOverlay layers={layers} interleaved />}
+      <DeckGLOverlay layers={layers} interleaved />
     </Map>
   );
 }
