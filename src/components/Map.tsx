@@ -114,7 +114,7 @@ export default function OurMap() {
         pointType: 'circle',
         pointRadiusMinPixels: 5,
         pointRadiusMaxPixels: 10,
-        getFillColor: (f: Feature) => {
+        getFillColor: (f: Feature): [number, number, number, number] => {
           const value = f.properties?.value || 0;
           const normalized = Math.max(0, Math.min(1, value / 2));
           const colorRange = [
@@ -131,7 +131,7 @@ export default function OurMap() {
           const color = colorRange[index].map((c, i) =>
             Math.round(c * (1 - t) + colorRange[nextIndex][i] * t)
           );
-          return [...color, 200];
+          return [color[0], color[1], color[2], 200];
         },
         getLineColor: [0, 0, 0, 255],
         lineWidthMinPixels: 1,
@@ -148,7 +148,7 @@ export default function OurMap() {
       {...MAP_OPTIONS}
     >
       <NavigationControl position="top-right" />
-      {stations && <DeckGLOverlay layers={layers} />}
+      {stations && <DeckGLOverlay layers={layers} interleaved />}
     </Map>
   );
 }
